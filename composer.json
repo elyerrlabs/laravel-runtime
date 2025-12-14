@@ -1,0 +1,22 @@
+{
+    "name": "elyerr/laravel-runtime",
+    "description": "A minimal Laravel runtime bridge exposing essential features for modular applications",
+    "type": "library",
+    "version": "v1.0.0",
+    "require-dev": {
+        "laravel/framework": "^12.42"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Elyerr\\LaravelRuntime\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Elvis Yerel Roman",
+            "email": "yerel9212@yahoo.es"
+        }
+    ],
+    "minimum-stability": "stable"
+}
