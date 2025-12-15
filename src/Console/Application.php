@@ -115,7 +115,7 @@ class Application extends \Illuminate\Console\Application
         "make:middleware",
         "make:model",
         "make:notification",
-        "make:notifications-table",
+        // "make:notifications-table",
         // "notifications:table",
         "make:observer",
         "make:policy",
