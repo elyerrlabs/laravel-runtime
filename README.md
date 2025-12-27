@@ -1,8 +1,10 @@
 # Laravel Runtime
 
-Laravel Runtime is a lightweight **bridge library** built on top of the Laravel framework. It is designed to help you create **modular applications or mini-frameworks** that rely on Laravel only where it adds real value.
+**Laravel Runtime** is a lightweight **runtime control layer** built on top of the Laravel framework.
 
-Instead of extending or forking Laravel, this library constrains it.
+It was developed as the foundational package for **Elymod**, a modular mini-framework that enables the creation of **pluggable modules for an OAuth2 Passport Server**.
+
+Instead of extending, forking, or modifying Laravel, this package **constrains and orchestrates it**, exposing only the framework features that a custom runtime truly needs.
 
 ---
 
@@ -10,31 +12,57 @@ Instead of extending or forking Laravel, this library constrains it.
 
 Laravel Runtime exists to support **custom runtimes and mini-frameworks** that:
 
-- Use Laravel as a dependency
-- Do not require the full Laravel feature set
-- Need a clean, controlled Artisan environment
-- Want to stay upgrade-safe over time
+- Use Laravel as a dependency, not as a full-stack framework
+- Require a **minimal and predictable execution environment**
+- Expose a **controlled subset of Artisan commands**
+- Must remain **upgrade-safe** across Laravel versions
 
-A real-world example is **Elymod**, a modular mini-framework built on top of Laravel Runtime. Elymod uses familiar Laravel `make:*` commands while enforcing a reduced and predictable runtime.
+Its primary real-world implementation is **Elymod**, where Laravel Runtime acts as the infrastructure layer that enables modular development without inheriting the full Laravel application lifecycle.
+
+---
+
+## 🧩 Why Laravel Runtime?
+
+Laravel is powerful, but not always appropriate as a complete framework for:
+
+- Modular platforms
+- Authorization servers
+- OAuth2 / Passport-based systems
+- Opinionated internal runtimes
+
+Laravel Runtime positions Laravel as an **engine**, not as the final product.
 
 ---
 
 ## ✨ Core Features
 
-- **Selective Artisan Commands**
-  Only explicitly allowed commands are exposed (for example, `make:*`).
+- **Selective Artisan Exposure**
+  Only explicitly allowed commands (such as `make:*`) are registered and executable.
 
 - **Custom Runtime Bootstrap**
-  Overrides Laravel’s Application and Console Kernel to control initialization.
+  Replaces Laravel’s default Application and Console Kernel to control the initialization flow.
 
 - **Command Map Filtering**
-  Internally filters Laravel’s command registry without modifying vendor files.
+  Filters Laravel’s internal command registry without modifying vendor files.
 
 - **Upgrade-Safe by Design**
-  No forks, no vendor hacks, no fragile overrides.
+  No forks, no patches, no vendor overrides.
 
-- **Framework-Oriented**
-  Ideal for building modular systems, internal platforms, or opinionated runtimes.
+- **Framework-Oriented Architecture**
+  Designed specifically to support mini-frameworks and modular systems.
+
+---
+
+## 🏗 Real-World Usage: Elymod
+
+**Elymod** is a modular mini-framework built on top of Laravel Runtime. It is designed to:
+
+- Build self-contained modules for an **OAuth2 Passport Server**
+- Enforce strict boundaries between modules
+- Provide familiar Laravel generators (`make:model`, `make:seeder`, etc.)
+- Prevent uncontrolled framework growth
+
+Laravel Runtime is the **core infrastructure layer** that makes Elymod possible.
 
 ---
 
@@ -44,30 +72,29 @@ A real-world example is **Elymod**, a modular mini-framework built on top of Lar
 composer require elyerr/laravel-runtime
 ```
 
-Laravel Runtime is meant to be **embedded**, not used as a standalone framework.
+Laravel Runtime is intended to be **embedded into another framework or system**, not used as a standalone application.
 
 ---
 
 ## 🏗 Architecture
 
 ```
-project
- └── laravel-runtime
-      ├── composer.json
-      ├── README.md
-      └── src
-           ├── App
-           │    ├── Application.php
-           │    └── ApplicationBuilder.php
-           └── Console
-                ├── Application.php
-                └── Kernel.php
-```
-
-```
 application (elymod)
    → laravel-runtime
        → laravel/framework
+```
+
+```
+laravel-runtime
+ ├── composer.json
+ ├── README.md
+ └── src
+      ├── App
+      │    ├── Application.php
+      │    └── ApplicationBuilder.php
+      └── Console
+           ├── Application.php
+           └── Kernel.php
 ```
 
 ---
@@ -76,12 +103,12 @@ application (elymod)
 
 Laravel Runtime is **not a Laravel replacement**.
 
-It is a **control layer** that allows you to:
+It is a **control and constraint layer** that allows you to:
 
-- Expose only what your system needs
+- Expose only what your runtime requires
 - Keep developer ergonomics familiar
-- Prevent framework sprawl in modular applications
-- Build long-lived architectures on top of Laravel
+- Avoid framework sprawl in modular systems
+- Build long-lived, maintainable architectures on top of Laravel
 
 ---
 
@@ -94,7 +121,7 @@ It is a **control layer** that allows you to:
 
 ## 📄 License
 
-[MIT License](./LINCESE.md)
+MIT License
 
 ---
 
