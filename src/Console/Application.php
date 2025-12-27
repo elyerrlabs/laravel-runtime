@@ -72,7 +72,7 @@ class Application extends \Illuminate\Console\Application
         //"route:clear",
         //"route:list",
         //"schema:dump",
-        //"db:seed",
+        "db:seed",
         //"schedule:finish",
         //"schedule:list",
         //"schedule:run",
