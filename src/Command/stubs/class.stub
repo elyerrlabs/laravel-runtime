@@ -1,0 +1,21 @@
+<?php
+
+namespace {{ namespace }};
+
+class {{ class }}
+{
+
+    /**
+     * Table name
+     * @var string
+     */
+    public $table = "{{ table }}";
+
+    /**
+     * Create a new class instance.
+     */
+    public function __construct()
+    {
+        //
+    }
+}
