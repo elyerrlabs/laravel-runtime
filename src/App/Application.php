@@ -1,12 +1,12 @@
 <?php
 namespace Elyerr\LaravelRuntime\App;
 
-use Elyerr\LaravelRuntime\Command\FactoryMakeCommand;
 use RuntimeException;
+use Illuminate\Support\Composer;
+use Illuminate\Filesystem\Filesystem;
 use Elyerr\LaravelRuntime\App\ApplicationBuilder;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\ConsoleOutput;
-use Illuminate\Contracts\Console\Kernel as ConsoleKernelContract;
+use Elyerr\LaravelRuntime\Providers\ServiceProvider;
+use Illuminate\Database\Migrations\MigrationCreator;
 
 class Application extends \Illuminate\Foundation\Application
 {
@@ -20,10 +20,23 @@ class Application extends \Illuminate\Foundation\Application
         return (new ApplicationBuilder(new static($basePath)))
             ->withKernels()
             ->withEvents()
+            ->withBindings([
+                MigrationCreator::class => function ($app) {
+                    return new MigrationCreator(
+                        $app->make(Filesystem::class),
+                        base_path('stubs')
+                    );
+                },
+                Composer::class => function ($app) {
+                    return new Composer($app->make(Filesystem::class));
+                },
+            ])
             ->withCommands([
                 \Elyerr\LaravelRuntime\Command\ModelMakeCommand::class,
                 \Elyerr\LaravelRuntime\Command\SeederMakeCommand::class,
-                \Elyerr\LaravelRuntime\Command\FactoryMakeCommand::class
+                \Elyerr\LaravelRuntime\Command\FactoryMakeCommand::class,
+                \Elyerr\LaravelRuntime\Command\StorageLink::class,
+                \Elyerr\LaravelRuntime\Command\MigrateMakeCommand::class,
             ])
             ->withProviders();
     }
