@@ -1,5 +1,9 @@
 ## Changelog
 
+### v1.0.5
+
+- Fix command make:model to generate migrations
+
 ### v1.0.4
 
 #### Added
