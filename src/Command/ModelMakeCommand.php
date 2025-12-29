@@ -20,27 +20,6 @@ class ModelMakeCommand extends \Illuminate\Foundation\Console\ModelMakeCommand
     }
 
     /**
-     * Create a migration file for the model.
-     *
-     * @return void
-     */
-    protected function createMigration()
-    {
-        $modulePrefix = $this->prefix();
-
-        $table = Str::snake(Str::pluralStudly(class_basename($this->argument('name'))));
-
-        if ($this->option('pivot')) {
-            $table = Str::singular($modulePrefix . $table);
-        }
-
-        $this->call('make:migration', [
-            'name' => "create_{$modulePrefix}{$table}_table",
-            '--create' => $modulePrefix . $table,
-        ]);
-    }
-
-    /**
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
