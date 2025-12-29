@@ -2,7 +2,7 @@
     "name": "elyerr/laravel-runtime",
     "description": "A minimal Laravel runtime bridge exposing essential features for modular applications",
     "type": "library",
-    "version": "v1.0.4",
+    "version": "v1.0.5",
     "require-dev": {
         "laravel/framework": "^12.42"
     },
