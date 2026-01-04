@@ -5,7 +5,6 @@ use RuntimeException;
 use Illuminate\Support\Composer;
 use Illuminate\Filesystem\Filesystem;
 use Elyerr\LaravelRuntime\App\ApplicationBuilder;
-use Elyerr\LaravelRuntime\Providers\ServiceProvider;
 use Illuminate\Database\Migrations\MigrationCreator;
 
 class Application extends \Illuminate\Foundation\Application
@@ -37,6 +36,7 @@ class Application extends \Illuminate\Foundation\Application
                 \Elyerr\LaravelRuntime\Command\FactoryMakeCommand::class,
                 \Elyerr\LaravelRuntime\Command\StorageLink::class,
                 \Elyerr\LaravelRuntime\Command\MigrateMakeCommand::class,
+                \Elyerr\LaravelRuntime\Command\TestMakeCommand::class
             ])
             ->withProviders();
     }
