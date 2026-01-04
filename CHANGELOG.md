@@ -1,13 +1,21 @@
 ## Changelog
 
+
+### v1.0.7
+
+- Fixed make:test command
+
+---
 ### v1.0.6
 
 - Removed db:seed command
 
+---
 ### v1.0.5
 
 - Fix command make:model to generate migrations
 
+---
 ### v1.0.4
 
 #### Added
