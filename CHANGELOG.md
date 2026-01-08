@@ -1,5 +1,8 @@
 ## Changelog
 
+### v1.0.8
+
+- Fixed assets:publish command
 
 ### v1.0.7
 
