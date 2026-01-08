@@ -2,6 +2,7 @@
 
 namespace Elyerr\LaravelRuntime\Command;
 
+use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
@@ -28,7 +29,14 @@ class StorageLink extends Command
     public function handle()
     {
         $modulePath = base_path('/');
-        $moduleName = basename($modulePath);
+        $rawModuleName = basename($modulePath);
+
+        $moduleName = Str::of($rawModuleName)
+            ->replace([',', '_'], ' ')
+            ->snake()
+            ->replace('_', '-')
+            ->lower()
+            ->toString();
 
         $target = public_path();
         $link = base_path("/../../public/third-party/{$moduleName}");
