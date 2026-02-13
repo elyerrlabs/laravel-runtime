@@ -1,5 +1,11 @@
 ## Changelog
 
+
+### v1.0.9
+
+- Fixed symlink creation failure in the `assets:publish` command under Docker/staging environments.
+
+
 ### v1.0.8
 
 - Fixed assets:publish command
