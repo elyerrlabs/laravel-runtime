@@ -28,7 +28,7 @@ class StorageLink extends Command
      */
     public function handle()
     {
-        $modulePath = base_path('/');
+        $modulePath = base_path('');
         $rawModuleName = basename($modulePath);
 
         $moduleName = Str::of($rawModuleName)
@@ -39,20 +39,36 @@ class StorageLink extends Command
             ->toString();
 
         $target = public_path();
-        $link = base_path("/../../public/third-party/{$moduleName}");
+        $link = base_path("../../public/third-party/{$moduleName}");
+
+        $this->info("Target: {$target}");
+        $this->info("Link: {$link}");
 
         if (!File::exists($target)) {
             $this->warn("No public assets found for module [{$moduleName}].");
             return Command::SUCCESS;
         }
 
+        $parentDir = dirname($link);
+        if (!File::exists($parentDir)) {
+            $this->warn("Creating parent directory for link: {$parentDir}");
+            File::makeDirectory($parentDir, 0755, true);
+        }
+
         if (File::exists($link) || is_link($link)) {
+            $this->warn("Deleting existing link or file at: {$link}");
             File::delete($link);
         }
 
-        File::link($target, $link);
-
-        $this->info("Assets published for module {$moduleName}.");
+        try {
+            File::link($target, $link);
+            $this->info("Assets published for module {$moduleName}.");
+        } catch (\Throwable $e) {
+            $this->error("Failed to create symlink!");
+            $this->error("Error: " . $e->getMessage());
+            $this->error("Check that the parent directory exists and that the container user has permissions.");
+            return Command::FAILURE;
+        }
 
         return Command::SUCCESS;
     }
