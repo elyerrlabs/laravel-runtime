@@ -34,7 +34,6 @@ class Application extends \Illuminate\Foundation\Application
                 \Elyerr\LaravelRuntime\Command\ModelMakeCommand::class,
                 \Elyerr\LaravelRuntime\Command\SeederMakeCommand::class,
                 \Elyerr\LaravelRuntime\Command\FactoryMakeCommand::class,
-                \Elyerr\LaravelRuntime\Command\StorageLink::class,
                 \Elyerr\LaravelRuntime\Command\MigrateMakeCommand::class,
                 \Elyerr\LaravelRuntime\Command\TestMakeCommand::class
             ])
