@@ -47,7 +47,7 @@ class ConsoleMakeCommand extends GeneratorCommand
     {
         $stub = parent::replaceClass($stub, $name);
 
-        $command = $this->option('command') ?: Str::slug($this->getModuleName()) . ':' . (new Stringable($name))->classBasename()->kebab()->value();
+        $command = $this->option('command') ?: Str::slug($this->getModuleName()) . ':module:' . (new Stringable($name))->classBasename()->kebab()->value();
 
         return str_replace(['dummy:command', '{{ command }}'], $command, $stub);
     }
