@@ -1,10 +1,28 @@
 ## Changelog
 
+### v1.1.1
+
+- Fix make component command
+
+---
+
+### v1.1.1
+
+- Update composer dependencies
+
+---
+
+### v1.1.0
+
+- Remove storage:link command
+
+---
 
 ### v1.0.9
 
 - Fixed symlink creation failure in the `assets:publish` command under Docker/staging environments.
 
+---
 
 ### v1.0.8
 
@@ -15,16 +33,19 @@
 - Fixed make:test command
 
 ---
+
 ### v1.0.6
 
 - Removed db:seed command
 
 ---
+
 ### v1.0.5
 
 - Fix command make:model to generate migrations
 
 ---
+
 ### v1.0.4
 
 #### Added
