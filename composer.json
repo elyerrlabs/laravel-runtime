@@ -10,14 +10,15 @@
   },
   "authors": [
     {
-      "name": "Elvis Yerel Roman",
+      "name": "Elvis Yerel Roman Concha",
       "email": "yerel9212@yahoo.es",
       "role": "owner",
-      "homepage": "https://github.com/elyerrlabs"
+      "homepage": "https://github.com/elyerrlabs/laravel-runtime"
     }
   ],
   "require": {
-    "laravel/framework": "^12.42"
+    "php": "^8.2",
+    "laravel/framework": ">=12.0 <=13.99"
   },
   "minimum-stability": "stable"
 }
