@@ -1,5 +1,12 @@
 ## Changelog
 
+### v1.1.4
+
+- Add api-response ^v2.0
+- Add new command to create a custom transformer
+
+---
+
 ### v1.1.3
 
 - Add custom console make command
