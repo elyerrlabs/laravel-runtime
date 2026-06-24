@@ -36,7 +36,8 @@ class Application extends \Illuminate\Foundation\Application
                 \Elyerr\LaravelRuntime\Command\FactoryMakeCommand::class,
                 \Elyerr\LaravelRuntime\Command\MigrateMakeCommand::class,
                 \Elyerr\LaravelRuntime\Command\TestMakeCommand::class,
-                \Elyerr\LaravelRuntime\Command\ComponentMakeCommand::class
+                \Elyerr\LaravelRuntime\Command\ComponentMakeCommand::class,
+                \Elyerr\LaravelRuntime\Command\ConsoleMakeCommand::class
             ])
             ->withProviders();
     }
