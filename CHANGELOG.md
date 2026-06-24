@@ -1,6 +1,12 @@
 ## Changelog
 
-### v1.1.1
+### v1.1.3
+
+- Add custom console make command
+
+---
+
+### v1.1.2
 
 - Fix make component command
 
