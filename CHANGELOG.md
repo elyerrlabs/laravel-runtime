@@ -1,5 +1,12 @@
 ## Changelog
 
+### Unreleased
+
+- Register base bindings and service providers for modules
+- Module vendor path detection
+
+---
+
 ### v1.1.4
 
 - Add api-response ^v2.0
