@@ -1,14 +1,24 @@
 <?php
+
 namespace Elyerr\LaravelRuntime\App;
 
+use Illuminate\Support\Collection;
+use Illuminate\Foundation\Mix;
+use Illuminate\Database\Migrations\MigrationCreator;
+use Illuminate\Container\Container;
+use Illuminate\Filesystem\Filesystem;
 use RuntimeException;
 use Illuminate\Support\Composer;
-use Illuminate\Filesystem\Filesystem;
 use Elyerr\LaravelRuntime\App\ApplicationBuilder;
-use Illuminate\Database\Migrations\MigrationCreator;
 
 class Application extends \Illuminate\Foundation\Application
 {
+    /**
+     * Begin configuring a new Laravel application instance.
+     *
+     * @param  string|null  $basePath
+     * @return \Illuminate\Foundation\Configuration\ApplicationBuilder
+     */
     public static function configure(?string $basePath = null)
     {
         $basePath = match (true) {
@@ -44,6 +54,50 @@ class Application extends \Illuminate\Foundation\Application
     }
 
     /**
+     * Register the basic bindings into the container.
+     *
+     * @return void
+     */
+    protected function registerBaseBindings()
+    {
+        static::setInstance($this);
+
+        $this->instance('app', $this);
+
+        $this->instance(Container::class, $this);
+        $this->singleton(Mix::class);
+
+        $this->singleton(
+            \Illuminate\Foundation\PackageManifest::class,
+            fn() =>
+            new \Elyerr\LaravelRuntime\App\PackageManifest(
+                new Filesystem,
+                $this->basePath(),
+                $this->getCachedPackagesPath()
+            )
+        );
+    }
+
+    /**
+     * Register all of the configured providers.
+     *
+     * @return void
+     */
+    public function registerConfiguredProviders()
+    {
+        $providers = (new Collection($this->make('config')->get('app.providers')))
+            ->partition(fn($provider) => str_starts_with($provider, 'Illuminate\\'));
+
+        (new \Illuminate\Foundation\ProviderRepository(
+            $this,
+            new Filesystem,
+            $this->getCachedServicesPath()
+        ))->load($providers->collapse()->toArray());
+
+        $this->fireAppCallbacks($this->registeredCallbacks);
+    }
+
+    /**
      * Get the application namespace.
      *
      * @return string
@@ -60,7 +114,6 @@ class Application extends \Illuminate\Foundation\Application
 
         foreach ((array) data_get($composer, 'autoload.psr-4') as $namespace => $path) {
             foreach ((array) $path as $pathChoice) {
-
                 if (realpath($this->path()) === realpath($this->basePath($pathChoice))) {
                     return $this->namespace = $namespace;
                 }
@@ -70,4 +123,3 @@ class Application extends \Illuminate\Foundation\Application
         throw new RuntimeException('Unable to detect application namespace.');
     }
 }
-
