@@ -1,6 +1,6 @@
 ## Changelog
 
-### Unreleased
+### v1.1.5
 
 - Register base bindings and service providers for modules
 - Module vendor path detection
