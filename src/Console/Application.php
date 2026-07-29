@@ -10,7 +10,6 @@ class Application extends \Illuminate\Console\Application
      */
     protected $commands = [
         "make:transformer",
-        "package:discover",
         "make:cast",
         "make:channel",
         "make:class",
