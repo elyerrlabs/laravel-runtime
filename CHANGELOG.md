@@ -1,5 +1,12 @@
 ## Changelog
 
+### v1.1.6
+
+- Replace the api-response:transformer command with make:transformer
+- Remove package:discover command
+
+---
+
 ### v1.1.5
 
 - Register base bindings and service providers for modules
