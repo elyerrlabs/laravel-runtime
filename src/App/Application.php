@@ -48,7 +48,7 @@ class Application extends \Illuminate\Foundation\Application
                 \Elyerr\LaravelRuntime\Command\TestMakeCommand::class,
                 \Elyerr\LaravelRuntime\Command\ComponentMakeCommand::class,
                 \Elyerr\LaravelRuntime\Command\ConsoleMakeCommand::class,
-                \Elyerr\ApiResponse\Console\TransformerCommand::class
+                \Elyerr\LaravelRuntime\Command\TransformerCommand::class
             ])
             ->withProviders();
     }
